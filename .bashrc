@@ -16,7 +16,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 # specific library link
 
 #----- clang3.0
-export PATH=/usr/local/clang-3.0/bin:$PATH
+export PATH=/usr/local/clang-3.4/bin:$PATH
 
 #----- Shogun
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/shogun/src
