@@ -96,6 +96,7 @@ NeoBundle 'davidhalter/jedi-vim'
 
 " カラースキームの追加
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'w0ng/vim-hybrid'
 
 "--------------------------------------------------------------------
 " シンタックスチェック(scrooloose/syntastic)
@@ -212,5 +213,8 @@ filetype plugin indent on     " required!
 filetype indent on
 syntax enable
 set background=dark
-let g:solarized_termtrans=1
-colorscheme solarized
+set t_Co=16
+"let g:solarized_termtrans=1
+"let g:solarized_termcolors=16
+"colorscheme solarized
+colorscheme hybrid-light
