@@ -24,6 +24,7 @@ set tabstop=2
 set autoindent
 set expandtab
 set shiftwidth=2
+set softtabstop=2
 "set foldmethod=indent
 "set foldlevel=0
 set foldnestmax=1
@@ -62,7 +63,6 @@ vnoremap v $h
 "------------------------------------------------------------------------------
 "
 "
-"
 "------------------------------------------------------------------------------
 " NeoBundleによるプラグインの管理
 " プラグインを記述してvimを開き":NeoBundleInstall"を実行する
@@ -85,13 +85,14 @@ NeoBundle 'SingleCompile'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Rip-Rip/clang_complete' " clang_complete 
-NeoBundle 'Pydiction'
+"NeoBundle 'Pydiction'
 NeoBundle 't9md/vim-quickhl'
 NeoBundle 'jceb/vim-hier'
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'osyo-manga/vim-watchdogs'
 NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'vim-jp/cpp-vim'
+NeoBundle 'davidhalter/jedi-vim'
 
 " カラースキームの追加
 NeoBundle 'altercation/vim-colors-solarized'
@@ -127,13 +128,39 @@ let g:syntastic_cpp_compiler_options='-std=c++11' " c++11文法に対応
 "--------------------------------------------------------------------
 " Python Complete
 "--------------------------------------------------------------------
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-let g:pydiction_menu_height =3
-autocmd FileType python setl autoindent
-autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType python setl expandtab tabstop=2 shiftwidth=2 softtabstop=2
-autocmd FileType python let g:python_location='~/.vim/bundle/Pydiction/complete-dict'
-autocmd FileType python let g:pydiction_location='~/.vim/bundle/Pydiction/complete-dict'
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+""autocmd FileType python let g:python_location='~/.vim/bundle/Pydiction/complete-dict'
+"autocmd FileType python let g:pydiction_location='~/.vim/bundle/Pydiction/complete-dict'
+"autocmd FileType python setl autoindent
+"autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+"autocmd FileType python setl expandtab tabstop=2 sw=2 softtabstop=2
+""setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+
+"NeoBundleLazy "davidhalter/jedi-vim",{
+"  \ "autoload": {
+"  \   "filetypes":["python","python3","djangohtml"]
+"  \ },
+"  \ "build": {
+"  \   "mac":  "pip install jedi",
+"  \   "unix": "pip install jedi",
+"  \}}
+"let s:hooks=neobundle#get_hooks("jedi-vim")
+"function! s:hooks.on_source(bundle)
+" jediにvimの設定を任せると'compliteopt+=preview'するので
+" 自動設定機能をoffにして手動で設定する
+
+
+
+" 補完の最初の項目が選択された状態をoffにする
+"let g:jedi#popup_select_first=0
+" quickrunと被るため大文字に変更
+"let g:jedi#rename_command='<Leader>R'
+"let g:jedi#popup_on_dot=1
+autocmd FileType python let b:did_ftplugin=1
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#popup_select_first=0
+let g:jedi#auto_vim_configuration=0
+"autocmd FileType python setlocal completeopt-=preview
 
 "--------------------------------------------------------------------
 " C/C++ Complete 
@@ -141,7 +168,7 @@ autocmd FileType python let g:pydiction_location='~/.vim/bundle/Pydiction/comple
 
 " include 補完設定
 let g:neocomplcache_include_paths = {
-  \ 'cpp'    : '.,/usr/include/c++/4.7',
+  \ 'cpp'    : '.,/usr/include/c++/4.7,/usr/local/include',
   \ 'c'      : '.,/usr/include',
   \ 'python' : '/usr/lib/python2.7/dist-packages\'
   \ }
@@ -186,4 +213,5 @@ filetype plugin indent on     " required!
 filetype indent on
 syntax enable
 set background=dark
+let g:solarized_termtrans=1
 colorscheme solarized

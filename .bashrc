@@ -8,14 +8,25 @@ alias clang++11='clang++ -std=c++11'
 
 export PATH=/usr/local/SPTK/bin:$PATH
 
+
 #----------------------------------------------------------#
-# インクルードパスとリンカの設定
+# バイナリファイルへのパス設定
+#----------------------------------------------------------#
+
+
+#----------------------------------------------------------#
+# リンカの設定
 #----------------------------------------------------------#
 
 #----- grobal link 
 export LD_LIBRARY_PATH=/usr/local/lib
 
-# specific library link
+#----------------------------------------------------------#
+# C++インクルードパス
+#----------------------------------------------------------#
+
+#----- grobal link
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include
 
 #----- clang3.0
 export PATH=/usr/local/clang-3.4/bin:$PATH
@@ -50,8 +61,6 @@ export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include/flann
 # PCL1.7
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include/pcl-1.7
 
-
 # Python-dev
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/python2.7
-
 
