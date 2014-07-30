@@ -30,6 +30,7 @@ set softtabstop=2
 set foldnestmax=1
 autocmd FileType cpp setlocal foldmethod=syntax
 "setlocal foldmethod=syntax """ 
+set statusline=2
 
 
 cnoremap <expr> / getcmdtype() == '/' ? '\\' : '/'
@@ -93,6 +94,72 @@ NeoBundle 'osyo-manga/vim-watchdogs'
 NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'vim-jp/cpp-vim'
 NeoBundle 'davidhalter/jedi-vim'
+"NeoBundle 'Lokaltog/vim-powerline', {'rtp' : 'powerline/bindings/vim'}
+NeoBundle 'itchyny/lightline.vim'
+"let g:Powerline_symbols='fancy'
+"set statusline=2
+set laststatus=2
+let g:lightline = {
+        \ 'colorscheme': 'wombat',
+        \ 'mode_map': {'c': 'NORMAL'},
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+        \ },
+        \ 'component_function': {
+        \   'modified': 'MyModified',
+        \   'readonly': 'MyReadonly',
+        \   'fugitive': 'MyFugitive',
+        \   'filename': 'MyFilename',
+        \   'fileformat': 'MyFileformat',
+        \   'filetype': 'MyFiletype',
+        \   'fileencoding': 'MyFileencoding',
+        \   'mode': 'MyMode'
+        \ }
+        \ }
+
+function! MyModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  try
+    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+      return fugitive#head()
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
 
 " カラースキームの追加
 NeoBundle 'altercation/vim-colors-solarized'
@@ -192,7 +259,7 @@ let g:clang_auto_select = 0
 let g:clang_use_library = 1
 let g:clang_complete_copen = 1
 
-let g:clang_library_path = '/usr/lib/llvm-3.2/lib/'
+let g:clang_library_path = '/usr/lib/llvm-3.4/lib/'
 "let g:clang_user_options = '-std=c++11 -stdlib=libc++'
 "let g:neocomplcache_clang_user_options = 
 "  \ '-I /usr/include'.
