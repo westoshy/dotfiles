@@ -259,7 +259,7 @@ let g:clang_auto_select = 0
 let g:clang_use_library = 1
 let g:clang_complete_copen = 1
 
-let g:clang_library_path = '/usr/lib/llvm-3.4/lib/'
+let g:clang_library_path = '/usr/lib/llvm-3.2/lib/'
 "let g:clang_user_options = '-std=c++11 -stdlib=libc++'
 "let g:neocomplcache_clang_user_options = 
 "  \ '-I /usr/include'.
@@ -275,6 +275,49 @@ let g:neocomplcache_force_omni_patterns.objc =
 let g:neocomplcache_force_omni_patterns.objcpp =
             \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
+"-------------------------------------------------------------------
+" vim R plugin
+"-------------------------------------------------------------------
+let g:vimrplugin_term="terminator"
+let g:vimrplugin_term_cmd="terminator --title R -e"
+let g:vimrplugin_r_path="/usr/bin/R"
+let g:vimrplugin_allnames=1
+let g:vimrplugin_show_args=1
+
+if has("gui_running")
+  inoremap <C-Space> <C-x><C-o>
+else
+  inoremap <Nul> <C-x><C-o>
+endif
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
+
+"--- タブでomni補完を行う
+function InsertTabWrapper(type)
+  let col = col('.') - 1
+  "omni補完の場合、omini以外にも上下左右の移動もする
+  if a:type=='omni'
+    if pumvisible()
+      return "\<c-n>"
+    endif
+    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
+      return "\<tab>"
+    elseif exists('&omnifunc') && &omnifunc == ''
+      return "\<c-n>"
+    else
+      return "\<c-x>\<c-o>"
+    endif
+"keywordの場合、該当のとき以外は何もしない
+  else
+    if pumvisible() || !col || getline('.')[col - 1] !~ '\k\|<\|/'
+      return ""
+    else
+      return "\<c-x>\<c-p>"
+    endif
+  endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper('omni')<cr><c-r>=InsertTabWrapper('keyword')<cr>
+"--------------------------------------------------------
 
 filetype plugin indent on     " required!
 filetype indent on

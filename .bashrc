@@ -65,4 +65,4 @@ export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include/pcl-1.7
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/python2.7
 
 # common
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/Development/Cplusplus/common
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/Development/Cplusplus/include
