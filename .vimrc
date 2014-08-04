@@ -236,7 +236,7 @@ let g:jedi#auto_vim_configuration=0
 
 " include 補完設定
 let g:neocomplcache_include_paths = {
-  \ 'cpp'    : '.,/usr/include/c++/4.7,/usr/local/include',
+  \ 'cpp'    : '.,/usr/include/c++/4.7,/usr/local/include,~/Development/Cplusplus/include',
   \ 'c'      : '.,/usr/include',
   \ 'python' : '/usr/lib/python2.7/dist-packages\'
   \ }
