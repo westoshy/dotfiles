@@ -3,9 +3,9 @@ set nocompatible
 " ファイルタイプ関連を無効化する
 filetype off
 
-"------------------------------------------------------------------------------
+"---------------------------------------------------------------------------
 " エディタの設定
-"------------------------------------------------------------------------------
+"---------------------------------------------------------------------------
 set ignorecase "do not distinguish Capital Charecters
 set smartcase "if capital character is input, search 
 set incsearch
@@ -46,22 +46,24 @@ set nowritebackup
 set nobackup
 set noswapfile
 
-"---------- 表示関連の設定 -----------------------------------------------------
+"---------- 表示関連の設定 -------------------------------------------------
 "set list
 set number
 "set wrap
 "set textwidth=0
-"set colorcolumn=80
+set colorcolumn=80
 set t_vb=
 "set novisualbell
 "set listchars=tab:>>-,trail:-,extends:>>,precedes:<<,nbsp:%,eol:
-"------------------------------------------------------------------------------
+"---------------------------------------------------------------------------
 "
 "
-"---------- マクロ、キーボード設定 ---------------------------------------------
+"------ マクロ、キーボード設定 ---------------------------------------------
 inoremap jj <Esc>
 vnoremap v $h
-"------------------------------------------------------------------------------
+"noremap ; :
+"noremap : ;
+"--------------------------------------------------------------------------
 "
 "
 "------------------------------------------------------------------------------
@@ -71,7 +73,8 @@ vnoremap v $h
 "------------------------------------------------------------------------------
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle/'))
+  call neobundle#begin(expand('~/.vim/bundle/')) 
+  call neobundle#end()
 endif
 
 "---------- NeoBundleによるプラグインの追加
@@ -226,6 +229,7 @@ let g:syntastic_cpp_compiler_options='-std=c++11' " c++11文法に対応
 "let g:jedi#popup_on_dot=1
 autocmd FileType python let b:did_ftplugin=1
 autocmd FileType python setlocal omnifunc=jedi#completions
+autocmd FileType python setlocal completeopt-=preview
 let g:jedi#popup_select_first=0
 let g:jedi#auto_vim_configuration=0
 "autocmd FileType python setlocal completeopt-=preview
@@ -236,7 +240,7 @@ let g:jedi#auto_vim_configuration=0
 
 " include 補完設定
 let g:neocomplcache_include_paths = {
-  \ 'cpp'    : '.,/usr/include/c++/4.7,/usr/local/include,~/Development/Cplusplus/include',
+  \ 'cpp'    : '.,/usr/include/c++/4.8/,~/Development/Cplusplus/include',
   \ 'c'      : '.,/usr/include',
   \ 'python' : '/usr/lib/python2.7/dist-packages\'
   \ }
@@ -259,12 +263,12 @@ let g:clang_auto_select = 0
 let g:clang_use_library = 1
 let g:clang_complete_copen = 1
 
-let g:clang_library_path = '/usr/lib/llvm-3.2/lib/'
+let g:clang_library_path = '/usr/lib/llvm-3.4/lib'
 "let g:clang_user_options = '-std=c++11 -stdlib=libc++'
 "let g:neocomplcache_clang_user_options = 
 "  \ '-I /usr/include'.
 "  \ '-I /usr/include/c++'.
-"  \ '-I /usr/include/c++/4.7'
+"  \ '-I /usr/include/c++/4.8'
 "let g:clang_user_options = '|| exit 0'
 let g:neocomplcache_force_omni_patterns.c =
             \ '[^.[:digit:] *\t]\%(\.\|->\)'
@@ -318,6 +322,24 @@ function InsertTabWrapper(type)
 endfunction
 inoremap <tab> <c-r>=InsertTabWrapper('omni')<cr><c-r>=InsertTabWrapper('keyword')<cr>
 "--------------------------------------------------------
+
+" Ctrl+e launches NERDTree
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+" Display Zenkaku Space -------------------------
+function! ZenkakuSpace()
+  highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+endfunction
+
+if has('syntax')
+  augroup ZenkakuSpace
+    autocmd!
+    autocmd ColorScheme * call ZenkakuSpace()
+    autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+  augroup END
+  call ZenkakuSpace()
+endif
+"------------------------
 
 filetype plugin indent on     " required!
 filetype indent on

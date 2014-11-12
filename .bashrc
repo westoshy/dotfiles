@@ -5,7 +5,8 @@ export PS1="\[\e[1;32m\][\u:\W]\$\[\e[00m\] "
 alias octave='octave-3.8.1'
 alias g++11='g++ -std=c++11'
 alias clang++11='clang++ -std=c++11'
-
+alias vim='/usr/local/bin/vim'
+alias gvim='/usr/local/bin/gvim'
 export PATH=/usr/local/SPTK/bin:$PATH
 
 
@@ -29,7 +30,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include
 
 #----- clang3.0
-export PATH=/usr/local/clang-3.4/bin:$PATH
+export PATH=/usr/bin:$PATH
 
 #----- Shogun
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/shogun/src
@@ -68,4 +69,4 @@ export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/python2.7
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/Downloads/mist-v1.6.0
 
 # common
-export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/Development/Cplusplus/include
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/Developments/Cplusplus/publiclib/include
