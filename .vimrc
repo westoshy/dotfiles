@@ -46,39 +46,32 @@ set nowritebackup
 set nobackup
 set noswapfile
 
-"---------- 表示関連の設定 -------------------------------------------------
+" display -----------------------------------------------------------
 "set list
-set number
+set number " display row numbers
 "set wrap
-"set textwidth=0
-set colorcolumn=80
+set textwidth=80   " force a line break
+set colorcolumn=80 " display colum line
 set t_vb=
 "set novisualbell
 "set listchars=tab:>>-,trail:-,extends:>>,precedes:<<,nbsp:%,eol:
-"---------------------------------------------------------------------------
-"
-"
-"------ マクロ、キーボード設定 ---------------------------------------------
+
+" mouse keyboard ----------------------------------------------------
 inoremap jj <Esc>
 vnoremap v $h
+
 "noremap ; :
 "noremap : ;
-"--------------------------------------------------------------------------
+"--------------------------------------------------------------------
+" Plugin Management with NeoBundle
+" :NeoBundleInstall, :NeoBundleClean"
 "
-"
-"------------------------------------------------------------------------------
-" NeoBundleによるプラグインの管理
-" プラグインを記述してvimを開き":NeoBundleInstall"を実行する
-" 削除するときは、記述を消去して":NeoBundleClean"を実行する
-"------------------------------------------------------------------------------
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
   call neobundle#begin(expand('~/.vim/bundle/')) 
   call neobundle#end()
 endif
 
-"---------- NeoBundleによるプラグインの追加
-"
 NeoBundle 'Shougo/neobundle.vim'  " NeoBundle plugin
 NeoBundle 'Shougo/vimproc'        " 
 NeoBundle 'Shougo/neocomplcache'
@@ -86,8 +79,10 @@ NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'SingleCompile'
+NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'Rip-Rip/clang_complete' " clang_complete 
 "NeoBundle 'Pydiction'
 NeoBundle 't9md/vim-quickhl'
@@ -97,10 +92,10 @@ NeoBundle 'osyo-manga/vim-watchdogs'
 NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'vim-jp/cpp-vim'
 NeoBundle 'davidhalter/jedi-vim'
-"NeoBundle 'Lokaltog/vim-powerline', {'rtp' : 'powerline/bindings/vim'}
+
 NeoBundle 'itchyny/lightline.vim'
-"let g:Powerline_symbols='fancy'
-"set statusline=2
+
+
 set laststatus=2
 let g:lightline = {
         \ 'colorscheme': 'wombat',
