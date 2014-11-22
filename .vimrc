@@ -258,7 +258,14 @@ let g:clang_auto_select = 0
 let g:clang_use_library = 1
 let g:clang_complete_copen = 1
 
-let g:clang_library_path = '/usr/lib/llvm-3.4/lib'
+if has('unix')
+  let g:clang_library_path = '/usr/lib/llvm-3.4/lib'
+endif
+if has('mac')
+  " download CommandLineTools in Xcode
+  let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
+endif
+
 "let g:clang_user_options = '-std=c++11 -stdlib=libc++'
 "let g:neocomplcache_clang_user_options = 
 "  \ '-I /usr/include'.

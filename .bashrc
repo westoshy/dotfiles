@@ -1,14 +1,36 @@
-#----------------------------------------------------------#
-# 一般設定
-#----------------------------------------------------------#
+# General Settings----------------------------------------#
 export PS1="\[\e[1;32m\][\u:\W]\$\[\e[00m\] "
 alias octave='octave-3.8.1'
 alias g++11='g++ -std=c++11'
 alias clang++11='clang++ -std=c++11'
-alias vim='/usr/local/bin/vim'
-alias gvim='/usr/local/bin/gvim'
+
 export PATH=/usr/local/SPTK/bin:$PATH
 
+# Check Platform
+if [ "$(uname)" == 'Darwin' ]; then
+  OS='Mac'
+elif [ "$(expr substr $(uname -s) 1 5)" == 'Linux' ]; then
+  OS='Linux'
+elif [ "$(expr substr $(uname -s) 1 10)" == 'MINGW32_NT' ]; then
+  OS='Cygwin'
+else
+  echo "Your platform ($(uname -a)) is not supported."
+  exit 1
+fi
+
+if [ $OS == 'Mac' ]; then
+  export TERM=xterm-color
+  alias ls='ls -G'
+  alias ll='ls -hi'
+  alias cedit='open $1 -a /Applications/CotEditor.app'
+  # if mac, "mvim" command launch MacVim(GUI mode)
+fi
+
+if [ $OS == 'Linux' ]; then
+  # compiled vim
+  alias vim='/usr/local/bin/vim'
+  alias gvim='/usr/local/bin/gvim'
+fi
 
 #----------------------------------------------------------#
 # バイナリファイルへのパス設定
