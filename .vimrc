@@ -1,18 +1,14 @@
-""" viのvim互換ではなくvimとして動作させる
-set nocompatible
-" ファイルタイプ関連を無効化する
+" ファイルタイプ関連の無効化
+" vimrcの終わりの方で有効にする
 filetype off
+filetype plugin indent off
 
-"---------------------------------------------------------------------------
-" エディタの設定
-"---------------------------------------------------------------------------
 set ignorecase "do not distinguish Capital Charecters
 set smartcase "if capital character is input, search 
 set incsearch
 set hlsearch
 set shiftround
 set infercase
-"set virtualedit=all " edit all
 set hidden
 set switchbuf=useopen
 set showmatch
@@ -25,11 +21,8 @@ set autoindent
 set expandtab
 set shiftwidth=2
 set softtabstop=2
-"set foldmethod=indent
-"set foldlevel=0
 set foldnestmax=1
 autocmd FileType cpp setlocal foldmethod=syntax
-"setlocal foldmethod=syntax """ 
 set statusline=2
 
 
@@ -84,7 +77,6 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tomtom/tcomment_vim'
 NeoBundle 'Rip-Rip/clang_complete' " clang_complete 
-"NeoBundle 'Pydiction'
 NeoBundle 't9md/vim-quickhl'
 NeoBundle 'jceb/vim-hier'
 NeoBundle 'thinca/vim-quickrun'
@@ -95,6 +87,18 @@ NeoBundle 'davidhalter/jedi-vim'
 
 NeoBundle 'itchyny/lightline.vim'
 
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'kannokanno/previm'
+
+" Previm --------------------------------------------------
+autocmd BufRead, BufNewFile *.mkd setfiletype mkd
+autocmd BufRead, BufNewFile *.md  setfiletype mkd
+let g:previm_open_cmd = ''
+nnoremap [previm] <Nop>
+nmap <Space>p [previm]
+nnoremap <silent> [previm]o :<C-u>PrevimOpen<CR>
+nnoremap <silent> [previm]r :call previm#refresh()<CR>
 
 set laststatus=2
 let g:lightline = {
@@ -344,7 +348,6 @@ endif
 "------------------------
 
 filetype plugin indent on     " required!
-filetype indent on
 syntax enable
 set background=dark
 set t_Co=16
