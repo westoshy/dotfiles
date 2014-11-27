@@ -8,6 +8,7 @@ neocomplcache
 nerdtree
 open-browser.vim
 previm
+pyibus.vim
 shabadou.vim
 syntastic
 tcomment_vim

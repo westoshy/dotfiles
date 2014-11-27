@@ -90,6 +90,21 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'kannokanno/previm'
+NeoBundle 'gist:koron/5992868',{
+      \ 'name':'pyibus.vim',
+      \ 'script_type':'plugin'
+      \}
+
+" im-control ----------------------------------------------
+"inoremap <silent> <c -j="-j"> <c -r="r">=IMState('FixMode')<CR>
+"let IM_CtrlIBusPython=1
+"set statusline+=%{IMStatus('[日本語固定]')}
+"function! IMStatus(...)
+"  return ''
+"endfunction
+" inoremap <silent> <Esc> <Esc>:<C-u>call ibus#disable()<CR>
+" inoremap <silent> <C-j> <C-\><C-o>:<C-u>call ibus#toggle(CR)<CR>
+" set statusline=[%{ibus#is_enabled()?'あ':'Aa'}]
 
 " Previm --------------------------------------------------
 autocmd BufRead, BufNewFile *.mkd setfiletype mkd
