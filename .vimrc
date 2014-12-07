@@ -25,6 +25,14 @@ set foldnestmax=1
 autocmd FileType cpp setlocal foldmethod=syntax
 set statusline=2
 
+inoremap <silent> <C-j> <C-r>=IMState('FixMode')<CR>
+let IM_vi_CooperativeMode = has('gui_running') ? 0 : 1
+" set timeout timeoutlen=3000 ttimeoutlen=100
+set cmdheight=2
+set statusline+=%{IMStatus(`JpFixedMode`)}
+function! IMStatus(...)
+  return ''
+endfunction
 
 cnoremap <expr> / getcmdtype() == '/' ? '\\' : '/'
 cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
@@ -40,21 +48,13 @@ set nobackup
 set noswapfile
 
 " display -----------------------------------------------------------
-"set list
 set number " display row numbers
-"set wrap
 set textwidth=80   " force a line break
-set colorcolumn=80 " display colum line
-set t_vb=
-"set novisualbell
-"set listchars=tab:>>-,trail:-,extends:>>,precedes:<<,nbsp:%,eol:
+set colorcolumn=80 " display colum lin
 
 " mouse keyboard ----------------------------------------------------
 inoremap jj <Esc>
 vnoremap v $h
-
-"noremap ; :
-"noremap : ;
 "--------------------------------------------------------------------
 " Plugin Management with NeoBundle
 " :NeoBundleInstall, :NeoBundleClean"
@@ -67,7 +67,8 @@ endif
 
 NeoBundle 'Shougo/neobundle.vim'  " NeoBundle plugin
 NeoBundle 'Shougo/vimproc'        " 
-NeoBundle 'Shougo/neocomplcache'
+"NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
@@ -76,7 +77,7 @@ NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'Rip-Rip/clang_complete' " clang_complete 
+NeoBundle 'osyo-manga/vim-marching'
 NeoBundle 't9md/vim-quickhl'
 NeoBundle 'jceb/vim-hier'
 NeoBundle 'thinca/vim-quickrun'
@@ -90,10 +91,10 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'kannokanno/previm'
-NeoBundle 'gist:koron/5992868',{
-      \ 'name':'pyibus.vim',
-      \ 'script_type':'plugin'
+NeoBundle 'koron/imcsc-vim', {
+      \ "rtp" : "uim-ctlso",
       \}
+NeoBundle 'fuenor/im_control.vim'
 
 " im-control ----------------------------------------------
 "inoremap <silent> <c -j="-j"> <c -r="r">=IMState('FixMode')<CR>
@@ -125,7 +126,7 @@ let g:lightline = {
         \ 'component_function': {
         \   'modified': 'MyModified',
         \   'readonly': 'MyReadonly',
-        \   'fugitive': 'MyFugitive',
+\   'fugitive': 'MyFugitive',
         \   'filename': 'MyFilename',
         \   'fileformat': 'MyFileformat',
         \   'filetype': 'MyFiletype',
@@ -252,54 +253,73 @@ let g:jedi#auto_vim_configuration=0
 " C/C++ Complete 
 "--------------------------------------------------------------------
 
-" include 補完設定
-let g:neocomplcache_include_paths = {
-  \ 'cpp'    : '.,/usr/include/c++/4.8/,~/Development/Cplusplus/include',
-  \ 'c'      : '.,/usr/include',
-  \ 'python' : '/usr/lib/python2.7/dist-packages\'
-  \ }
-" pythonのinclude_patternはこれでいいのか？
-let g:neocomplcache_include_patterns = {
-  \ 'cpp'    : '^\s*#\s*include',
-  \ 'python' : '^\s*\<import\',
-  \ }
+" " include 補完設定
+" let g:neocomplcache_include_paths = {
+"   \ 'cpp'    : '.,/usr/include/c++/4.8/,~/Development/Cplusplus/include',
+"   \ 'c'      : '.,/usr/include',
+"   \ 'python' : '/usr/lib/python2.7/dist-packages\'
+"   \ }
+" " pythonのinclude_patternはこれでいいのか？
+" let g:neocomplcache_include_patterns = {
+"   \ 'cpp'    : '^\s*#\s*include',
+"   \ 'python' : '^\s*\<import\',
+"   \ }
+"
+" let g:neocomplcache_enable_at_startup = 1
+" let g:neocomplcache_enable_underbar_completion = 1
+"
+" if !exists('g:neocomplcache_force_omni_patterns')
+"       let g:neocomplcache_force_omni_patterns = {}
+" endif
+"
+" let g:neocomplcache_force_overwrite_completefunc = 1
+" let g:clang_complete_auto = 0 " オートコンプリートは切る
+" let g:clang_auto_select = 0
+" let g:clang_use_library = 1
+" let g:clang_complete_copen = 1
+"
+" if has('unix')
+"   let g:clang_library_path = '/usr/lib/llvm-3.4/lib'
+" endif
+" if has('mac')
+"   " download CommandLineTools in Xcode
+"   let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
+" endif
+"
+" "autocmd InsertEnter * :inoremap <expr><buffer> <CR>
+" "neocomplcache#close_popup() . "#<CR>"
+"
+"
+" "let g:clang_user_options = '-std=c++11 -stdlib=libc++'
+" "let g:neocomplcache_clang_user_options = 
+" "  \ '-I /usr/include'.
+" "  \ '-I /usr/include/c++'.
+" "  \ '-I /usr/include/c++/4.8'
+" "let g:clang_user_options = '|| exit 0'
+" let g:neocomplcache_force_omni_patterns.c =
+"             \ '[^.[:digit:] *\t]\%(\.\|->\)'
+" let g:neocomplcache_force_omni_patterns.cpp =
+"             \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" let g:neocomplcache_force_omni_patterns.objc =
+"             \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" let g:neocomplcache_force_omni_patterns.objcpp =
+"             \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_underbar_completion = 1
+let g:marching_backend = "sync_clang_command"
+let g:marcing_clang_command_option="-std=c++11"
+let g:marching_enable_neocomplete=1
 
-if !exists('g:neocomplcache_force_omni_patterns')
-      let g:neocomplcache_force_omni_patterns = {}
+
+let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_ignore_case=1
+let g:neocomplete#enable_smart_case=1
+let g:neocomplete#skip_auto_completion_time=""
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
 endif
-
-let g:neocomplcache_force_overwrite_completefunc = 1
-let g:clang_complete_auto = 0 " オートコンプリートは切る
-let g:clang_auto_select = 0
-let g:clang_use_library = 1
-let g:clang_complete_copen = 1
-
-if has('unix')
-  let g:clang_library_path = '/usr/lib/llvm-3.4/lib'
-endif
-if has('mac')
-  " download CommandLineTools in Xcode
-  let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
-endif
-
-"let g:clang_user_options = '-std=c++11 -stdlib=libc++'
-"let g:neocomplcache_clang_user_options = 
-"  \ '-I /usr/include'.
-"  \ '-I /usr/include/c++'.
-"  \ '-I /usr/include/c++/4.8'
-"let g:clang_user_options = '|| exit 0'
-let g:neocomplcache_force_omni_patterns.c =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplcache_force_omni_patterns.cpp =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-let g:neocomplcache_force_omni_patterns.objc =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-let g:neocomplcache_force_omni_patterns.objcpp =
-            \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
+let g:neocomplete#force_omni_input_patterns.cpp =
+          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+  
 "-------------------------------------------------------------------
 " vim R plugin
 "-------------------------------------------------------------------

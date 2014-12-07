@@ -26,11 +26,11 @@ if [ $OS == 'Mac' ]; then
   # if mac, "mvim" command launch MacVim(GUI mode)
 fi
 
-if [ $OS == 'Linux' ]; then
+#if [ $OS == 'Linux' ]; then
   # compiled vim
-  alias vim='/usr/local/bin/vim'
-  alias gvim='/usr/local/bin/gvim'
-fi
+  #alias vim='/usr/local/bin/vim'
+  #alias gvim='/usr/local/bin/gvim'
+#fi
 
 #----------------------------------------------------------#
 # バイナリファイルへのパス設定
@@ -52,6 +52,7 @@ export LD_LIBRARY_PATH=/usr/local/lib
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include
 
 #----- clang3.0
+export PATH=$PATH:/usr/include/c++/4.8.2
 export PATH=/usr/bin:$PATH
 
 #----- Shogun
