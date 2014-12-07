@@ -28,13 +28,16 @@ fi
 
 #if [ $OS == 'Linux' ]; then
   # compiled vim
-  #alias vim='/usr/local/bin/vim'
-  #alias gvim='/usr/local/bin/gvim'
+  alias vim='/usr/local/bin/vim'
+  alias gvim='/usr/local/bin/gvim'
 #fi
 
 #----------------------------------------------------------#
 # バイナリファイルへのパス設定
 #----------------------------------------------------------#
+export BUNDLER_PATH=~/Applications/Bundler
+export BUNDLER_BIN_PATH=$BUNDLER_PATH/bin
+export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
 
 
 #----------------------------------------------------------#
@@ -43,6 +46,7 @@ fi
 
 #----- grobal link 
 export LD_LIBRARY_PATH=/usr/local/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Applications/Bundler/lib
 
 #----------------------------------------------------------#
 # C++インクルードパス
