@@ -26,11 +26,15 @@ if [ $OS == 'Mac' ]; then
   # if mac, "mvim" command launch MacVim(GUI mode)
 fi
 
-#if [ $OS == 'Linux' ]; then
+if [ $OS == 'Linux' ]; then
   # compiled vim
   alias vim='/usr/local/bin/vim'
   alias gvim='/usr/local/bin/gvim'
-#fi
+  alias open='caja .' # open current directory
+  alias image='eog'
+  alias ilist='geeqie'
+  alias pdf='evince'
+fi
 
 #----------------------------------------------------------#
 # バイナリファイルへのパス設定
@@ -47,6 +51,7 @@ export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
 #----- grobal link 
 export LD_LIBRARY_PATH=/usr/local/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Applications/Bundler/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Developments/Cplusplus/publiclib/lib
 
 #----------------------------------------------------------#
 # C++インクルードパス

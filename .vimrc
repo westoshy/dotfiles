@@ -309,6 +309,9 @@ let g:marching_backend = "sync_clang_command"
 let g:marcing_clang_command_option="-std=c++11"
 let g:marching_enable_neocomplete=1
 
+let g:marching_include_paths = [
+  \ "~/Developments/Cplusplus/publiclib/include/"
+  \]
 
 let g:neocomplete#enable_at_startup=1
 let g:neocomplete#enable_ignore_case=1
