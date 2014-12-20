@@ -24,6 +24,8 @@ set softtabstop=2
 set foldnestmax=1
 autocmd FileType cpp setlocal foldmethod=syntax
 set statusline=2
+set hlsearch
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
 inoremap <silent> <C-j> <C-r>=IMState('FixMode')<CR>
 let IM_vi_CooperativeMode = has('gui_running') ? 0 : 1

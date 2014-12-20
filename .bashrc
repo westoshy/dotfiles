@@ -42,7 +42,9 @@ fi
 export BUNDLER_PATH=~/Applications/Bundler
 export BUNDLER_BIN_PATH=$BUNDLER_PATH/bin
 export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
-
+export PATH=$PATH:~/scripts
+export PATH=$PATH:~/binaries
+export PYTHONPATH=$PATH:~/pyModule
 
 #----------------------------------------------------------#
 # リンカの設定
