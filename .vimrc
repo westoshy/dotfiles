@@ -73,7 +73,7 @@ NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'SingleCompile'
-NeoBundle 'Townk/vim-autoclose'
+"NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'tomtom/tcomment_vim'
@@ -92,20 +92,10 @@ NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'kannokanno/previm'
 NeoBundle 'koron/imcsc-vim', {
-      \ "rtp" : "uim-ctlso",
-      \}
-NeoBundle 'fuenor/im_control.vim'
-
-" im-control ----------------------------------------------
-"inoremap <silent> <c -j="-j"> <c -r="r">=IMState('FixMode')<CR>
-"let IM_CtrlIBusPython=1
-"set statusline+=%{IMStatus('[日本語固定]')}
-"function! IMStatus(...)
-"  return ''
-"endfunction
-" inoremap <silent> <Esc> <Esc>:<C-u>call ibus#disable()<CR>
-" inoremap <silent> <C-j> <C-\><C-o>:<C-u>call ibus#toggle(CR)<CR>
-" set statusline=[%{ibus#is_enabled()?'あ':'Aa'}]
+       \ "rtp" : "uim-ctlso",
+       \}
+"NeoBundle 'fuenor/im_control.vim'
+"
 
 " Previm --------------------------------------------------
 autocmd BufRead, BufNewFile *.mkd setfiletype mkd
@@ -184,7 +174,7 @@ NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'w0ng/vim-hybrid'
 
 "--------------------------------------------------------------------
-" シンタックスチェック(scrooloose/syntastic)
+" Syntax check (scrooloose/syntastic)
 "--------------------------------------------------------------------
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
@@ -209,101 +199,38 @@ let g:quickrun_config = {
   \   },
   \}
 let g:hier_enabled=1
-let g:syntastic_cpp_compiler_options='-std=c++11' " c++11文法に対応
+let g:syntastic_cpp_compiler_options='-std=c++11' 
 
 "--------------------------------------------------------------------
-" Python Complete
+" Python
 "--------------------------------------------------------------------
-"autocmd FileType python set omnifunc=pythoncomplete#Complete
-""autocmd FileType python let g:python_location='~/.vim/bundle/Pydiction/complete-dict'
-"autocmd FileType python let g:pydiction_location='~/.vim/bundle/Pydiction/complete-dict'
-"autocmd FileType python setl autoindent
-"autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-"autocmd FileType python setl expandtab tabstop=2 sw=2 softtabstop=2
-""setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
-
-"NeoBundleLazy "davidhalter/jedi-vim",{
-"  \ "autoload": {
-"  \   "filetypes":["python","python3","djangohtml"]
-"  \ },
-"  \ "build": {
-"  \   "mac":  "pip install jedi",
-"  \   "unix": "pip install jedi",
-"  \}}
-"let s:hooks=neobundle#get_hooks("jedi-vim")
-"function! s:hooks.on_source(bundle)
-" jediにvimの設定を任せると'compliteopt+=preview'するので
-" 自動設定機能をoffにして手動で設定する
-
-
-
-" 補完の最初の項目が選択された状態をoffにする
-"let g:jedi#popup_select_first=0
-" quickrunと被るため大文字に変更
-"let g:jedi#rename_command='<Leader>R'
-"let g:jedi#popup_on_dot=1
 autocmd FileType python let b:did_ftplugin=1
 autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType python setlocal completeopt-=preview
 let g:jedi#popup_select_first=0
 let g:jedi#auto_vim_configuration=0
-"autocmd FileType python setlocal completeopt-=preview
 
 "--------------------------------------------------------------------
-" C/C++ Complete 
+" Ruby
 "--------------------------------------------------------------------
+NeoBundleLazy 'marcus/rsense', {
+      \ 'autoload': {
+      \   'filetypes': 'ruby',
+      \ },
+      \}
+NeoBundle 'supermomonga/neocomplete-rsense.vim', {
+      \ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
+      \}
+let g:rsenseUseOmniFunc = 1
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 
-" " include 補完設定
-" let g:neocomplcache_include_paths = {
-"   \ 'cpp'    : '.,/usr/include/c++/4.8/,~/Development/Cplusplus/include',
-"   \ 'c'      : '.,/usr/include',
-"   \ 'python' : '/usr/lib/python2.7/dist-packages\'
-"   \ }
-" " pythonのinclude_patternはこれでいいのか？
-" let g:neocomplcache_include_patterns = {
-"   \ 'cpp'    : '^\s*#\s*include',
-"   \ 'python' : '^\s*\<import\',
-"   \ }
-"
-" let g:neocomplcache_enable_at_startup = 1
-" let g:neocomplcache_enable_underbar_completion = 1
-"
-" if !exists('g:neocomplcache_force_omni_patterns')
-"       let g:neocomplcache_force_omni_patterns = {}
-" endif
-"
-" let g:neocomplcache_force_overwrite_completefunc = 1
-" let g:clang_complete_auto = 0 " オートコンプリートは切る
-" let g:clang_auto_select = 0
-" let g:clang_use_library = 1
-" let g:clang_complete_copen = 1
-"
-" if has('unix')
-"   let g:clang_library_path = '/usr/lib/llvm-3.4/lib'
-" endif
-" if has('mac')
-"   " download CommandLineTools in Xcode
-"   let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib'
-" endif
-"
-" "autocmd InsertEnter * :inoremap <expr><buffer> <CR>
-" "neocomplcache#close_popup() . "#<CR>"
-"
-"
-" "let g:clang_user_options = '-std=c++11 -stdlib=libc++'
-" "let g:neocomplcache_clang_user_options = 
-" "  \ '-I /usr/include'.
-" "  \ '-I /usr/include/c++'.
-" "  \ '-I /usr/include/c++/4.8'
-" "let g:clang_user_options = '|| exit 0'
-" let g:neocomplcache_force_omni_patterns.c =
-"             \ '[^.[:digit:] *\t]\%(\.\|->\)'
-" let g:neocomplcache_force_omni_patterns.cpp =
-"             \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-" let g:neocomplcache_force_omni_patterns.objc =
-"             \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-" let g:neocomplcache_force_omni_patterns.objcpp =
-"             \ '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+"--------------------------------------------------------------------
+" C/C++
+"--------------------------------------------------------------------
 
 let g:marching_backend = "sync_clang_command"
 let g:marcing_clang_command_option="-std=c++11"
@@ -322,9 +249,9 @@ if !exists('g:neocomplete#force_omni_input_patterns')
 endif
 let g:neocomplete#force_omni_input_patterns.cpp =
           \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-  
+
 "-------------------------------------------------------------------
-" vim R plugin
+" R
 "-------------------------------------------------------------------
 let g:vimrplugin_term="terminator"
 let g:vimrplugin_term_cmd="terminator --title R -e"
