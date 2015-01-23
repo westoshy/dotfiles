@@ -42,15 +42,20 @@ fi
 export BUNDLER_PATH=~/Applications/Bundler
 export BUNDLER_BIN_PATH=$BUNDLER_PATH/bin
 export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
+<<<<<<< HEAD
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/binaries
 export PYTHONPATH=$PATH:~/pyModule
+=======
+export PYTHONPATH=$PYTHONPATH:~/pylib
+export PATH=$PATH:~/binaries
+>>>>>>> c7c1df6d34a0e9b3711083f42bda6a8342ff7e76
 
 #----------------------------------------------------------#
 # リンカの設定
 #----------------------------------------------------------#
 
-#----- grobal link 
+#----- local libraries link 
 export LD_LIBRARY_PATH=/usr/local/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Applications/Bundler/lib
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Developments/Cplusplus/publiclib/lib
@@ -59,12 +64,13 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Developments/Cplusplus/publiclib/lib
 # C++インクルードパス
 #----------------------------------------------------------#
 
-#----- grobal link
+#----- local libraries link
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include
 
-#----- clang3.0
+#----- clang 3.0
 export PATH=$PATH:/usr/include/c++/4.8.2
 export PATH=/usr/bin:$PATH
+export PATH=$PATH:/usr/local/include
 
 #----- Shogun
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/shogun/src
