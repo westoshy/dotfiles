@@ -36,20 +36,30 @@ if [ $OS == 'Linux' ]; then
   alias pdf='evince'
 fi
 
+if [ $OS == 'Cygwin' ]; then
+  export LANG=ja_JP.utf-8
+  export PATH=$PATH:/C/Applications/ffmpeg/bin
+  export PATH=$PATH:/C/Dev/Python27/Scripts
+  export PATH=$PATH:/C/Users/nishimura/AppData/Local/Pandoc
+  export PATH=$PATH:~/scripts
+  alias ls='ls --color=auto --show-control-chars --ignore={NTUSER*,ntuser*}'
+  alias ll='ls -l'
+  alias l='ls -CF'
+  alias vim='C:/Applications/vim32bit/vim.exe'
+  alias gvim='C:/Applications/vim32bit/gvim.exe'
+fi
+
 #----------------------------------------------------------#
 # バイナリファイルへのパス設定
 #----------------------------------------------------------#
 export BUNDLER_PATH=~/Applications/Bundler
 export BUNDLER_BIN_PATH=$BUNDLER_PATH/bin
 export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
-<<<<<<< HEAD
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/binaries
 export PYTHONPATH=$PATH:~/pyModule
-=======
 export PYTHONPATH=$PYTHONPATH:~/pylib
 export PATH=$PATH:~/binaries
->>>>>>> c7c1df6d34a0e9b3711083f42bda6a8342ff7e76
 
 #----------------------------------------------------------#
 # リンカの設定
