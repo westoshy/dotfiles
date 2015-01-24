@@ -77,7 +77,14 @@ if has('vim_starting')
 endif
 
 NeoBundle 'Shougo/neobundle.vim'  " NeoBundle plugin
-NeoBundle 'Shougo/vimproc'        " 
+NeoBundle 'Shougo/vimproc', {
+  \ 'build': {
+  \ 'windows': 'echo "Sorry, cannot update"',
+  \ 'cygwin' : 'make -f make_cygwin.mak',
+  \ 'mac'    : 'make -f make_mac.mak',
+  \ 'unix'   : 'make -f make_unix.mak',
+  \ },
+  \}
 "NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neocomplete'
 NeoBundle 'Shougo/vimfiler'
