@@ -1,6 +1,15 @@
 " colorscheme
-colorscheme hybrid
-" tab is always displayed
-set showtabline=2
-" font 
-set guifont=Monospace\ 10
+if !(has("win32") || has("win32unix"))
+  " gvim for unix  
+  colorscheme "hybrid"
+  set showtabline=2
+  set guifont=Monospace\ 10
+
+else
+  " gvim for windows
+  colorscheme jellybeans
+  set gfn=Ricty_Diminished:h13.5:cSHIFTJIS
+  set antialias
+  set showtabline=2
+  set transparency=150
+endif

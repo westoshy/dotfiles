@@ -1,10 +1,16 @@
-let OSTYPE=system('uname')
-" cygwin: OSTYPE=="CYGWIN_NT-6.1\n"
-" linux : OSTYPE=="Linux\n"
-" mac   : OSTYPE=="Darwin\n"
+"--------------------------------------------------------------------
+" Check System
+" if has('win32')     : windows 32bit system
+" if has('win32unix') : cygwin
+" if has('mac')       : Mac OS
+" if has('unix')      : Linux OS
+"--------------------------------------------------------------------
 
 filetype off
 filetype plugin indent off
+
+set nowritebackup
+set backupdir=~/.vim/tmp
 
 set ignorecase "do not distinguish Capital Charecters
 set smartcase "if capital character is input, search 
@@ -96,8 +102,7 @@ NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'kannokanno/previm'
 
-if OSTYPE != "CYGWIN_NT-6.1\n"
-  echo "aa"
+if !(has('win32unix') || has('win32'))
   NeoBundle 'koron/imcsc-vim', {
          \ "rtp" : "uim-ctlso",
          \}
@@ -178,6 +183,7 @@ endfunction
 
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'nanotech/jellybeans.vim'
 
 "--------------------------------------------------------------------
 " Syntax check (scrooloose/syntastic)

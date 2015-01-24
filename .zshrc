@@ -29,9 +29,11 @@ case ${OSTYPE} in
     alias ls="ls --color=auto --show-control-chars -I'NTUSER*' -I'ntuser*'"
     alias ll='ls -l'
     alias l='ls -CF'
-    alias gvim='C:/Applications/vim32bit/gvim.exe -p --remote-tab-silent'
+    alias gvim='/cygdrive/c/Applications/vim32bit/gvim.exe'
     export OUTPUT_CHARSET=sjis
     export PATH=$PATH:/C/Dev/Python27/Scripts
     export PATH=$PATH:~/Scripts/
     export PATH=$PATH:/C/Users/nishimura/AppData/Local/Pandoc
+    export PATH=$PATH:/C/Applications/vim32bit
+    export CYGWIN="winsymlinks"
 esac
