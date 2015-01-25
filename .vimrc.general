@@ -1,0 +1,67 @@
+set nowritebackup
+if !isdirectory(expand("$HOME/.vim/tmp"))
+  call mkdir(expand("$HOME/.vim/tmp")) 
+endif
+set backupdir=~/.vim/tmp
+
+set ignorecase
+set smartcase
+set incsearch
+set hlsearch
+set infercase
+set hidden
+set switchbuf=useopen
+set showmatch
+set matchtime=3
+set matchpairs& matchpairs+=<:>
+set backspace=indent,eol,start
+set showcmd
+set tabstop=2
+set autoindent
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set foldnestmax=1
+autocmd FileType cpp setlocal foldmethod=syntax
+
+set statusline=2
+nmap <Esc><Esc> :nohlsearch<CR><Esc>
+
+" inoremap <silent> <C-j> <C-r>=IMState('FixMode')<CR>
+" let IM_vi_CooperativeMode = has('gui_running') ? 0 : 1
+" set cmdheight=2
+" set statusline+=%{IMStatus(`JpFixedMode`)}
+" function! IMState(...)
+"   return ''
+" endfunction
+
+if has('unnamedplus')
+  set clipboard& clipboard+=unnamedplus,unnamed
+else
+  set clipboard& clipboard+=unnamed
+endif
+
+set nowritebackup
+set nobackup
+set noswapfile
+
+set number
+set textwidth=80
+set colorcolumn=80
+inoremap jj <Esc>
+vnoremap v &h
+
+"----- Display Zenkaku Space --------------------------------------------------
+function! ZenkakuSpace()
+  highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+endfunction
+
+if has('syntax')
+  augroup ZenkakuSpace
+    autocmd!
+    autocmd ColorScheme * call ZenkakuSpace()
+    autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+  augroup END
+  call ZenkakuSpace()
+endif
+"------------------------------------------------------------------------------

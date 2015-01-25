@@ -9,94 +9,46 @@
 filetype off
 filetype plugin indent off
 
-source $HOME/dotfiles/.vimrc.test
+source $HOME/dotfiles/.vimrc.general
+source $HOME/dotfiles/.vimrc.neobundle
+source $HOME/dotfiles/.vimrc.utils
+source $HOME/dotfiles/.vimrc.colors
+source $HOME/dotfiles/.vimrc.statusbar
 
-set nowritebackup
-set backupdir=~/.vim/tmp
+source $HOME/dotfiles/.vimrc.markdown
+source $HOME/dotfiles/.vimrc.syntax
+source $HOME/dotfiles/.vimrc.Complete
 
-set ignorecase "do not distinguish Capital Charecters
-set smartcase "if capital character is input, search 
-set incsearch
-set hlsearch
-set shiftround
-set infercase
-set hidden
-set switchbuf=useopen
-set showmatch
-set matchtime=3
-set matchpairs& matchpairs+=<:>
-set backspace=indent,eol,start
-set showcmd
-set tabstop=2
-set autoindent
-set expandtab
-set shiftwidth=2
-set softtabstop=2
-set foldnestmax=1
-autocmd FileType cpp setlocal foldmethod=syntax
-set statusline=2
-set hlsearch
-nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-inoremap <silent> <C-j> <C-r>=IMState('FixMode')<CR>
-let IM_vi_CooperativeMode = has('gui_running') ? 0 : 1
-" set timeout timeoutlen=3000 ttimeoutlen=100
-set cmdheight=2
-set statusline+=%{IMStatus(`JpFixedMode`)}
-function! IMStatus(...)
-  return ''
-endfunction
-
-cnoremap <expr> / getcmdtype() == '/' ? '\\' : '/'
-cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
-
-if has('unnamedplus')
-  set clipboard& clipboard+=unnamedplus,unnamed
-else
-  set clipboard& clipboard+=unnamed
-endif
-
-set nowritebackup
-set nobackup
-set noswapfile
-
-" display -----------------------------------------------------------
-set number " display row numbers
-set textwidth=80   " force a line break
-set colorcolumn=80 " display colum lin
-
-" mouse keyboard ----------------------------------------------------
-inoremap jj <Esc>
-vnoremap v $h
 "--------------------------------------------------------------------
 " Plugin Management with NeoBundle
 " :NeoBundleInstall, :NeoBundleClean"
 "
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#begin(expand('~/.vim/bundle/')) 
-  call neobundle#end()
-endif
-
-NeoBundle 'Shougo/neobundle.vim'  " NeoBundle plugin
-NeoBundle 'Shougo/vimproc', {
-  \ 'build': {
-  \ 'windows': 'echo "Sorry, cannot update"',
-  \ 'cygwin' : 'make -f make_cygwin.mak',
-  \ 'mac'    : 'make -f make_mac.mak',
-  \ 'unix'   : 'make -f make_unix.mak',
-  \ },
-  \}
+" if has('vim_starting')
+"   set runtimepath+=~/.vim/bundle/neobundle.vim
+"   call neobundle#begin(expand('~/.vim/bundle/')) 
+"   call neobundle#end()
+" endif
+"
+" NeoBundle 'Shougo/neobundle.vim'  " NeoBundle plugin
+" NeoBundle 'Shougo/vimproc', {
+"   \ 'build': {
+"   \ 'windows': 'echo "Sorry, cannot update"',
+"   \ 'cygwin' : 'make -f make_cygwin.mak',
+"   \ 'mac'    : 'make -f make_mac.mak',
+"   \ 'unix'   : 'make -f make_unix.mak',
+"   \ },
+"   \}
 "NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neocomplete'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/unite.vim'
+"NeoBundle 'Shougo/vimfiler'
+"NeoBundle 'Shougo/unite.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'SingleCompile'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'osyo-manga/vim-marching'
+"NeoBundle 'scrooloose/nerdtree'
+"NeoBundle 'tomtom/tcomment_vim'
+"NeoBundle 'osyo-manga/vim-marching'
 NeoBundle 't9md/vim-quickhl'
 NeoBundle 'jceb/vim-hier'
 NeoBundle 'thinca/vim-quickrun'
@@ -105,13 +57,13 @@ NeoBundle 'osyo-manga/shabadou.vim'
 NeoBundle 'vim-jp/cpp-vim'
 NeoBundle 'davidhalter/jedi-vim'
 
-NeoBundle 'itchyny/lightline.vim'
+"NeoBundle 'itchyny/lightline.vim'
 
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'kannokanno/previm'
 
-if !(has('win32unix') || has('win32'))
+if !(has('win32unix') || has('win32') || has('mac'))
   NeoBundle 'koron/imcsc-vim', {
          \ "rtp" : "uim-ctlso",
          \}
@@ -189,9 +141,9 @@ function! MyMode()
 endfunction
 
 " Color Scheme
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'nanotech/jellybeans.vim'
+" NeoBundle 'altercation/vim-colors-solarized'
+" NeoBundle 'w0ng/vim-hybrid'
+" NeoBundle 'nanotech/jellybeans.vim'
 
 "--------------------------------------------------------------------
 " Syntax check (scrooloose/syntastic)
@@ -315,28 +267,28 @@ inoremap <tab> <c-r>=InsertTabWrapper('omni')<cr><c-r>=InsertTabWrapper('keyword
 "--------------------------------------------------------
 
 " Ctrl+e launches NERDTree
-nnoremap <silent><C-e> :NERDTreeToggle<CR>
+"nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
 " Display Zenkaku Space -------------------------
-function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    autocmd ColorScheme * call ZenkakuSpace()
-    autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
-  augroup END
-  call ZenkakuSpace()
-endif
+" function! ZenkakuSpace()
+"   highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+" endfunction
+"
+" if has('syntax')
+"   augroup ZenkakuSpace
+"     autocmd!
+"     autocmd ColorScheme * call ZenkakuSpace()
+"     autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+"   augroup END
+"   call ZenkakuSpace()
+" endif
 "------------------------
 
 filetype plugin indent on     " required!
 syntax enable
-set background=dark
-set t_Co=16
+"set background=dark
+"set t_Co=16
 "let g:solarized_termtrans=1
 "let g:solarized_termcolors=16
 "colorscheme solarized
-colorscheme hybrid-light
+"colorscheme hybrid-light

@@ -1,2 +1,5 @@
+PROMPT=$'%{\e[1;38;5;46m%}%n%(!.#.$)%{\e[m%} '
+RPROMPT=$'%{\e[1;38;5;226m%}%~%(!.#.$)%{\e[m%} '
+
 alias ls='ls -G'
 alias ll='ls -hi'
