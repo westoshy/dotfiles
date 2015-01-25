@@ -1,3 +1,9 @@
+local GREEN=$'%{\e[1;32m%}'
+local BLUE=#'%{\e[1;34m%}'
+PROMPT=$BLUE'[%n]%# '$WHITE
+RPROMPT=$GREEN'[%~]'$WHITE
+setopt transient_rprompt
+
 export PATH=$PATH:/C/Applications/ffmpeg/bin                                
 alias ls="ls --color=auto --show-control-chars -I'NTUSER*' -I'ntuser*'"     
 alias ll='ls -l'                                                            

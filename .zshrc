@@ -7,9 +7,6 @@ DOTFILESDIR=${HOME}/dotfiles
 source ${DOTFILESDIR}/.zshrc.colors
 cd ${HOME}
 
-# promt setup
-PROMPT=$'%{\e[1;38;5;46m%}%n%(!.#.$)%{\e[m%} '
-RPROMPT=$'%{\e[1;38;5;226m%}%~%(!.#.$)%{\e[m%} '
 
 # OS setup
 case ${OSTYPE} in
