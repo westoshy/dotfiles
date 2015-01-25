@@ -1,0 +1,59 @@
+#----------------------------------------------------------------------------#
+# Color Setup                                                                #
+#----------------------------------------------------------------------------#
+
+#---- attribute -------------------------------------------------------------#
+# 00: normal, 01: bold, 04: underline, 07: flip fg/bg 08: hide               #
+#                                                                            #
+#---- foreground(fg) color --------------------------------------------------#
+# 30: black, 31: red, 32: green, 33: yellow, 34: blue, 35: purple, 36: cyan, #
+# 37: gray, 38: detail setup, 39: default                                    #
+#                                                                            #
+#---- background color ------------------------------------------------------#
+# 40: black, 41: red, 42: green, 43: yellow, 44: blue, 45: purple, 46: cyan, #
+# 47: gray, 48: detail setup, 49: default                                    #
+#                                                                            #
+#---- detail setup ----------------------------------------------------------#
+# '\e[attribute;fg;bgm'                                                      #
+# e.g.) echo '\e[1;31;44mHello World!\e[m'                                   #
+#                                                                            #
+# ---------------------------------------------------------------------------#
+
+StColor='\e['
+EdColor='\em'
+typeset -A ColorDict
+ColorDict=(
+  'RED' '38;5;160'
+  'BLUE' '38:5:27'
+  'GREEN' '38;5;46'
+  'GRAY' '38;5;250'
+  'YELLOW' '38;5;226'
+)
+typeset -A BgColorDict
+BgColorDict=(
+  'RED' '38;5;160'
+  'BLUE' '38:5:27'
+  'GREEN' '38;5;46'
+  'GRAY' '38;5;250'
+  'YELLOW' '38;5;226'
+)
+# Foreground Color Samples
+showColors()
+{
+  for c in {000..255}
+  do echo -n "\e[38;5;${c}m $c"
+    [ $(($c%16)) -eq 15 ] && echo
+  done
+  echo
+}
+# Background Color Samples
+showBgColor()
+{
+  local c
+  for c in {000..255}
+  do
+    echo -n "\e[0;48;5;${c}m${c}\e[m "
+    [ $(($c%16)) -eq 15 ] && echo
+  done
+  echo 
+}

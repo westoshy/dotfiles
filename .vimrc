@@ -9,6 +9,8 @@
 filetype off
 filetype plugin indent off
 
+source $HOME/dotfiles/.vimrc.test
+
 set nowritebackup
 set backupdir=~/.vim/tmp
 
@@ -113,7 +115,6 @@ if !(has('win32unix') || has('win32'))
   NeoBundle 'koron/imcsc-vim', {
          \ "rtp" : "uim-ctlso",
          \}
-  NeoBundle 'fuenor/im_control.vim'
 endif
 
 " Previm --------------------------------------------------
@@ -187,7 +188,7 @@ function! MyMode()
   return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-
+" Color Scheme
 NeoBundle 'altercation/vim-colors-solarized'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'nanotech/jellybeans.vim'
