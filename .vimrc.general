@@ -27,13 +27,9 @@ autocmd FileType cpp setlocal foldmethod=syntax
 set statusline=2
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-" inoremap <silent> <C-j> <C-r>=IMState('FixMode')<CR>
-" let IM_vi_CooperativeMode = has('gui_running') ? 0 : 1
-" set cmdheight=2
-" set statusline+=%{IMStatus(`JpFixedMode`)}
-" function! IMState(...)
-"   return ''
-" endfunction
+" default IME off
+set iminsert=0
+set imsearch=-1
 
 if has('unnamedplus')
   set clipboard& clipboard+=unnamedplus,unnamed

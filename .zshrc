@@ -1,5 +1,5 @@
 # autoload
-autoload -U compinit; compinit
+autoload -U compinit; compinit -u
 autoload colors; colors
 
 # directory 

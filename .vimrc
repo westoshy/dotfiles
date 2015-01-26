@@ -17,8 +17,7 @@ source $HOME/dotfiles/.vimrc.statusbar
 
 source $HOME/dotfiles/.vimrc.markdown
 source $HOME/dotfiles/.vimrc.syntax
-source $HOME/dotfiles/.vimrc.Complete
-
+source $HOME/dotfiles/.vimrc.complete
 
 "--------------------------------------------------------------------
 " Plugin Management with NeoBundle
