@@ -8,6 +8,7 @@ export PATH=$PATH:/C/Applications/ffmpeg/bin
 alias ls="ls --color=auto --show-control-chars -I'NTUSER*' -I'ntuser*'"     
 alias ll='ls -l'                                                            
 alias l='ls -CF'                                                            
+alias vim='C:/Applications/vim32bit/vim.exe'
 alias gvim='/cygdrive/c/Applications/vim32bit/gvim.exe'                     
 export OUTPUT_CHARSET=sjis                                                  
 export PATH=$PATH:/C/Dev/Python27/Scripts                                   
