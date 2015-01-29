@@ -2,7 +2,35 @@
 PROMPT=$'%{\e[1;38;5;46m%}%n%(!.#.$)%{\e[m%} '
 RPROMPT=$'%{\e[1;38;5;226m%}%~%(!.#.$)%{\e[m%} '
 
-
+# alias
+alias g++11='g++ -std=c++11'
+alias clang++11='clang++ -std=c++11'
 alias ls='ls --color'
 alias vim='/usr/local/bin/vim'
 alias gvim='/usr/local/bin/gvim'
+
+# path
+export BUNDLER_PATH=~/Applications/Bundler
+export BUNDLER_BIN_PATH=$BUNDLER_PATH/bin
+export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
+
+
+export PATH=$PATH:/usr/include/c++/4.8.2
+export PATH=$PATH:/usr/bin
+export PATH=$PATH:/usr/local/include
+export PATH=$PATH:~/scripts
+export PATH=$PATH:~/binaries
+
+
+# ldpath
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Applications/Bundler/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Developments/Cplusplus/publiclib/lib
+
+# cpp path
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include/eigen3
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/Developments/Cplusplus/publiclib/include
+
+# python path
+export PYTHONPATH=$PYTHONPATH:~/pylib
