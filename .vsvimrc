@@ -48,17 +48,23 @@ set colorcolumn=80
 inoremap jj <Esc>
 vnoremap v &h
 
-"----- Display Zenkaku Space --------------------------------------------------
-function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
-endfunction
-
-if has('syntax')
-  augroup ZenkakuSpace
-    autocmd!
-    autocmd ColorScheme * call ZenkakuSpace()
-    autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
-  augroup END
-  call ZenkakuSpace()
-endif
-"------------------------------------------------------------------------------
+" " lhs comments
+" vmap ,# :s/^/#/<CR>:nohlsearch<CR>
+" vmap ,/ :s/^/\/\//<CR>:nohlsearch<CR>
+" vmap ,> :s/^/> /<CR>:nohlsearch<CR>
+" vmap ," :s/^/\"/<CR>:nohlsearch<CR>
+" vmap ,% :s/^/%/<CR>:nohlsearch<CR>
+" vmap ,! :s/^/!/<CR>:nohlsearch<CR>
+" vmap ,; :s/^/;/<CR>:nohlsearch<CR>
+" vmap ,- :s/^/--/<CR>:nohlsearch<CR>
+" vmap ,c :s/^\/\/\\|^--\\|^> \\|^[#"%!;]//<CR>:nohlsearch<CR>
+"
+" " wrapping comments
+" vmap ,* :s/^\(.*\)$/\/\* \1 \*\//<CR>:nohlsearch<CR>
+" vmap ,( :s/^\(.*\)$/\(\* \1 \*\)/<CR>:nohlsearch<CR>
+" vmap ,< :s/^\(.*\)$/<!-- \1 -->/<CR>:nohlsearch<CR>
+" vmap ,d :s/^\([/(]\*\\|<!--\) \(.*\) \(\*[/)]\\|-->\)$/\2/<CR>:nohlsearch<CR>
+"
+" " block comments
+" vmap ,b v`<I<CR><esc>k0i/*<ESC>`>j0i*/<CR><esc><ESC>
+" vmap ,h v`<I<CR><esc>k0i<!--<ESC>`>j0i--><CR><esc><ESC>
