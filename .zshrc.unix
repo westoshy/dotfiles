@@ -7,20 +7,24 @@ alias g++11='g++ -std=c++11'
 alias clang++11='clang++ -std=c++11'
 alias ls='ls --color'
 alias vim='/usr/local/bin/vim'
-alias gvim='/usr/local/bin/gvim'
+alias gvim="/usr/local/bin/gvim 2>/dev/null"
+
+# git command
+export GIT_REPOSITORY=~/Dropbox/GitRepository
+alias lsrepos="ls $GIT_REPOSITORY -1"
 
 # path
 export BUNDLER_PATH=~/Applications/Bundler
 export BUNDLER_BIN_PATH=$BUNDLER_PATH/bin
 export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
-
+export WEKA_PATH=~/Applications/weka
 
 export PATH=$PATH:/usr/include/c++/4.8.2
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/local/include
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/binaries
-
+export PATH=$PATH:$WEKA_PATH
 
 # ldpath
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
@@ -30,7 +34,22 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/Developments/Cplusplus/publiclib/lib
 # cpp path
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include/eigen3
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/eigen3
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/pcl-1.7
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/Developments/Cplusplus/publiclib/include
+
+# path for sample data 
+export WEKA_SAMPLE=~/Applications/weka/data
+export IMAGE_SAMPLE=~/Dropbox/SampleData/Image
+export VIDEO_SAMPLE=~/Dropbox/SampleData/Video
+export AUDIO_SAMPLE=~/Dropbox/SampleData/audio
+export CSV_SAMPLE=~/Dropbox/SampleData/dataset/
+
+# path opencv related files
+export OPENCV_HAARCASCADE_XML=/usr/local/share/OpenCV/haarcascades
+
+# java classpath
+export CLASSPATH=$CLASSPATH:$WEKA_PATH
 
 # python path
 export PYTHONPATH=$PYTHONPATH:~/pylib

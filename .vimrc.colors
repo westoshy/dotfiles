@@ -5,4 +5,6 @@ set background=dark
 set t_Co=16
 colorscheme hybrid-light
 "colorscheme solarized
-"colorscheme jellybeans
+if has("gui_running") 
+  colorscheme jellybeans
+endif

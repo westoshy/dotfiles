@@ -1,7 +1,7 @@
 " colorscheme
 if !(has("win32") || has("win32unix"))
   " gvim for unix  
-  colorscheme "hybrid"
+  "colorscheme "jellybeans"
   set showtabline=2
   set guifont=Monospace\ 10
 elseif has("mac")
