@@ -54,4 +54,4 @@ export CLASSPATH=$CLASSPATH:$WEKA_PATH
 
 # python path
 export PYTHONPATH=$PYTHONPATH:~/pylib
-export PYTHONPATH=$PYTHONPATH:~/Downloads/SetupCaffe/caffe/python
+export PYTHONPATH=$PYTHONPATH:~/Applications/caffe/python
