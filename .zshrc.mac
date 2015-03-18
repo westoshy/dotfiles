@@ -1,5 +1,21 @@
 PROMPT=$'%{\e[1;38;5;46m%}%n%(!.#.$)%{\e[m%} '
 RPROMPT=$'%{\e[1;38;5;226m%}%~%(!.#.$)%{\e[m%} '
 
+# alias for MacVim-Kaoriya which is installed from bellow.
+# URL: https://github.com/splhack/macvim-kaoriya/releases/tag/20150314
+# you should download "macvim-kaoriya-20150314.dmg" and install it to your mac
+alias vim='env_LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/Vim'
+alias gvim='env_LANG=ja_JP.UTF-8 /Applications/MacVim.app/Contents/MacOS/mvim'
+
 alias ls='ls -G'
 alias ll='ls -hi'
+
+# CUDA Path
+export PATH=/usr/local/cuda/bin:$PATH
+export DYLD_LIBRARY_PATH=/usr/local/cuda/lib
+export LD_LIBRARY_PATH=/usr/local/cuda/lib:$LD_LIBRARY_PATH
+export CPLUS_INCLUDE_PATH=”/Developer/GPU
+Computing/C/common/inc”:$CPLUS_INCLUDE_PATH
+export C_INCLUDE_PATH=”/Developer/GPU Computing/C/common/inc”:$C_INCLUDE_PATH
+export LIBRARY_PATH=”/Developer/GPU Computing/C/common/lib”:”/Developer/GPU
+Computing/C/lib”:/usr/local/cuda/lib:$LIBRARY_PATH

@@ -2,7 +2,7 @@ NeoBundle "itchyny/lightline.vim"
 
 inoremap <silent> <C-j> <C-r>=IMState('FixMode')<CR>
 let IM_vi_CooperativeMode = has('gui_running') ? 0 : 1
-" set cmdheight=2
+set cmdheight=2
 set statusline+=%{IMStatus(`JpFixedMode`)}
 function! IMState(...)
   return ''
