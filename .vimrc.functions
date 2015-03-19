@@ -1,0 +1,24 @@
+
+" omni completion by <tab> key
+function InsertTabWrapper(type)
+  let col = col('.') - 1
+  if a:type=='omni'
+    if pumvisible()
+      return "\<c-n>"
+    endif
+    if !col || getline('.')[col - 1] !~ '\k\|<\|/'
+      return "\<tab>"
+    elseif exists('&omnifunc') && &omnifunc == ''
+      return "\<c-n>"
+    else
+      return "\<c-x>\<c-o>"
+    endif
+  else
+    if pumvisible() || !col || getline('.')[col - 1] !~ '\k\|<\|/'
+      return ""
+    else
+      return "\<c-x>\<c-p>"
+    endif
+  endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper('omni')<cr><c-r>=InsertTabWrapper('keyword')<cr>

@@ -1,1 +1,83 @@
+NeoBundle 'Shougo/neocomplete'
 NeoBundle 'osyo-manga/vim-marching'
+NeoBundle 'osyo-manga/vim-watchdogs'
+NeoBundle 'osyo-manga/shabadou.vim'
+NeoBundle 'vim-jp/cpp-vim'
+NeoBundle 'davidhalter/jedi-vim'
+
+"--------------------------------------------------------------------
+" C/C++
+"--------------------------------------------------------------------
+
+" include path
+setlocal path+=
+      \/usr/include/c++/4.8.2/,
+      \/usr/include/pcl-1.7/,
+      \/usr/local/include,
+      \/usr/local/cuda/include,
+      \~/Developments/Cplusplus/publiclib/include
+
+let g:marching_backend = "sync_clang_command"
+let g:marcing_clang_command_option="-std=c++11"
+let g:marching_enable_neocomplete=1
+
+" let g:marching_include_paths = [
+"   \ "/usr/local/include/",
+"   \ "/usr/local/cuda/include/",
+"   \ "~/Developments/Cplusplus/publiclib/include"
+"   \]
+
+let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_ignore_case=1
+let g:neocomplete#enable_smart_case=1
+let g:neocomplete#skip_auto_completion_time=""
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.cpp =
+          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.cuda =
+          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+
+"--------------------------------------------------------------------
+" Python
+"--------------------------------------------------------------------
+autocmd FileType python let b:did_ftplugin=1
+autocmd FileType python setlocal omnifunc=jedi#completions
+autocmd FileType python setlocal completeopt-=preview
+let g:jedi#popup_select_first=0
+let g:jedi#auto_vim_configuration=0
+
+"--------------------------------------------------------------------
+" Ruby
+"--------------------------------------------------------------------
+NeoBundleLazy 'marcus/rsense', {
+      \ 'autoload': {
+      \   'filetypes': 'ruby',
+      \ },
+      \}
+NeoBundle 'supermomonga/neocomplete-rsense.vim', {
+      \ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
+      \}
+let g:rsenseUseOmniFunc = 1
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+
+"-------------------------------------------------------------------
+" R
+"-------------------------------------------------------------------
+let g:vimrplugin_term="terminator"
+let g:vimrplugin_term_cmd="terminator --title R -e"
+let g:vimrplugin_r_path="/usr/bin/R"
+let g:vimrplugin_allnames=1
+let g:vimrplugin_show_args=1
+
+if has("gui_running")
+  inoremap <C-Space> <C-x><C-o>
+else
+  inoremap <Nul> <C-x><C-o>
+endif
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine

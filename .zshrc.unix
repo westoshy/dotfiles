@@ -18,7 +18,7 @@ export BUNDLER_PATH=~/Applications/Bundler-v0.4
 export BUNDLER_BIN_PATH=$BUNDLER_PATH/bin
 export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
 export WEKA_PATH=~/Applications/weka
-
+export SLICER_HOME=~/Applications/Slicer
 
 export PATH=$PATH:/usr/include/c++/4.8.2
 export PATH=$PATH:/usr/bin
