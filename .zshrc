@@ -12,6 +12,14 @@ export PATH=:$PATH:~/scripts/
 export PATH=:$PATH:~/scripts/install
 source ~/scripts/shellfunc/shellfunc.fnc
 
+# common setup
+
+# English->Japanese dictionary
+dic() 
+{
+  w3m "http://ejje.weblio.jp/content/$1" | grep "用例"
+}
+
 # OS setup
 case ${OSTYPE} in
   darwin*)
