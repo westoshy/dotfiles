@@ -15,6 +15,7 @@ source ~/scripts/shellfunc/shellfunc.fnc
 # common setup
 
 # English->Japanese dictionary
+alias up="cd ..; ls"
 dic() 
 {
   w3m "http://ejje.weblio.jp/content/$1" | grep "用例"
