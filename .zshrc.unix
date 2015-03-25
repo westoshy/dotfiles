@@ -19,6 +19,7 @@ export BUNDLER_BIN_PATH=$BUNDLER_PATH/bin
 export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
 export WEKA_PATH=~/Applications/weka
 export SLICER_HOME=~/Applications/Slicer
+export SPTK_BIN="/usr/local/SPTK/bin"
 
 export PATH=$PATH:/usr/include/c++/4.8.2
 export PATH=$PATH:/usr/bin
@@ -26,6 +27,8 @@ export PATH=$PATH:/usr/local/include
 export PATH=$PATH:~/scripts
 export PATH=$PATH:~/binaries
 export PATH=$PATH:$WEKA_PATH
+export PATH=$PATH:$SPTK_BIN
+
 
 # ldpath
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib

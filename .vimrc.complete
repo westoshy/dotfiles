@@ -81,3 +81,13 @@ else
 endif
 vmap <Space> <Plug>RDSendSelection
 nmap <Space> <Plug>RDSendLine
+
+"--------------------------------------------------------------------
+" Haskell
+"--------------------------------------------------------------------
+
+NeoBundle 'kana/vim-filetype-haskell' " indent
+NeoBundle 'eagletmt/ghcmod-vim' " display types of variables
+" ghcmod-vim needs ghc-mod which can be installed by "cabal install ghc-mod"
+let $PATH = $PATH . ':' . expand('~/.cabal/bin')
+NeoBundle 'ujihisa/neco-ghc' " complete
