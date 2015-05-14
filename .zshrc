@@ -10,7 +10,10 @@ cd ${HOME}
 # common path
 export PATH=:$PATH:~/scripts/
 export PATH=:$PATH:~/scripts/install
-source ~/scripts/shellfunc/shellfunc.fnc
+
+if [ -e scripts ]; then
+  source ~/scripts/shellfunc/shellfunc.fnc
+fi
 
 # common setup
 
