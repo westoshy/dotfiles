@@ -1,19 +1,33 @@
 local GREEN=$'%{\e[1;32m%}'
 local BLUE=$'%{\e[1;34m%}'
-PROMPT=$BLUE'[%n]%# '$WHITE
-RPROMPT=$GREEN'[%~]'$WHITE
+PROMPT=$BLUE'[%n]%# '$WHITE$GREEN'[%~]'$WHITE'
+> '
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn hg bzr
+zstyle ':vcs_info:*' formats '(%s)-[%b]'
+zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
+zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
+zstyle ':vcs_info:bzr:*' use-simple true
+precmd () {
+  psvar=()
+  LANG=en_US.UTF-8 vcs_info
+  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+RPROMPT="%1(v|%F{green}%1v%f|)"
+
 setopt transient_rprompt
 
-export PATH=$PATH:/C/Applications/ffmpeg/bin                                
+export PATH=$PATH:/C/Applications/ffmpeg/bin                         
 alias ls="ls --color=auto --show-control-chars -I'NTUSER*' -I'ntuser*'"     
 alias ll='ls -l'                                                            
 alias l='ls -CF'                                                            
 alias vim='/cygdrive/c/Applications/vim32bit/vim.exe'
 alias gvim='/cygdrive/c/Applications/vim32bit/gvim.exe'                     
 alias vbs='/cygdrive/c/windows/system32/cscript.exe'
+alias ffmpeg2theora='/cygdrive/c/Applications/ffmpeg/bin/ffmpeg2theora.exe'
 export OUTPUT_CHARSET=sjis                                                  
 export PATH=$PATH:/C/Dev/Python27/Scripts                                   
 export PATH=$PATH:~/Scripts/                                                
 export PATH=$PATH:/C/Users/nishimura/AppData/Local/Pandoc                   
-export PATH=$PATH:/C/Applications/vim32bit                                  
+export PATH=$PATH:/C/Applications/vim32bit 
 export CYGWIN="winsymlinks"        
