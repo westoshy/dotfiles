@@ -1,4 +1,3 @@
-NeoBundle "itchyny/lightline.vim"
 
 inoremap <silent> <C-j> <C-r>=IMState('FixMode')<CR>
 let IM_vi_CooperativeMode = has('gui_running') ? 0 : 1

@@ -1,6 +1,3 @@
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'kannokanno/previm'
 
 autocmd BufRead, BufNewFile *.mkd setfiletype mkd
 autocmd BufRead, BufNewFile *.md  setfiletype mkd

@@ -1,42 +1,42 @@
-NeoBundle 'Shougo/neocomplete'
-NeoBundle 'osyo-manga/vim-marching'
-NeoBundle 'osyo-manga/vim-watchdogs'
-NeoBundle 'osyo-manga/shabadou.vim'
-NeoBundle 'vim-jp/cpp-vim'
-NeoBundle 'davidhalter/jedi-vim'
 
 "--------------------------------------------------------------------
 " C/C++
 "--------------------------------------------------------------------
 
-" include path
-setlocal path+=
-      \/usr/include/c++/4.8.2/,
-      \/usr/include/pcl-1.7/,
-      \/usr/local/include,
-      \/usr/local/cuda/include,
-      \~/Developments/Cplusplus/publiclib/include
-
+" clang command setupj:w
+let g:marching_clang_command="/usr/bin/clang++-3.5"
+" let g:marching_backend="sync_wandbox"
 let g:marching_backend = "sync_clang_command"
-let g:marcing_clang_command_option="-std=c++11"
+let g:marching_clang_command_option="-std=c++1y"
 let g:marching_enable_neocomplete=1
+" imap <C-x><C-o><Plug>(marching_start_omni_complete)
+" imap <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
+" let g:marching_enable_dup=1
+" let g:marching#sync_wandbox#timeout="10"
 
-" let g:marching_include_paths = [
-"   \ "/usr/local/include/",
-"   \ "/usr/local/cuda/include/",
-"   \ "~/Developments/Cplusplus/publiclib/include"
-"   \]
 
+" set include directory
+let g:neocomplete#sources#include#paths = {
+  \ 'cpp': '.,/usr/include,/usr/local/include'
+  \ }
+
+if !exists('g:neocomplete#sources#include#patterns') 
+  let g:neocomplete#sources#include#patterns = {}
+endif
+let g:neocomplete#sources#include#patterns.c='^\s*#\s*include'
+let g:neocomplete#sources#include#patterns.cpp='^\s*#\s*include'
+
+let g:acp_enableAtStartup=0
 let g:neocomplete#enable_at_startup=1
-let g:neocomplete#enable_ignore_case=1
-let g:neocomplete#enable_smart_case=1
-let g:neocomplete#skip_auto_completion_time=""
+" let g:neocomplete#enable_ignore_case=1
+" let g:neocomplete#enable_smart_case=1
+" let g:neocomplete#skip_auto_completion_time=""
+let g:neocomplete#force_overwrite_completefnc=1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
+
 let g:neocomplete#force_omni_input_patterns.cpp =
-          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:neocomplete#force_omni_input_patterns.cuda =
           \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
 "--------------------------------------------------------------------
@@ -51,14 +51,6 @@ let g:jedi#auto_vim_configuration=0
 "--------------------------------------------------------------------
 " Ruby
 "--------------------------------------------------------------------
-NeoBundleLazy 'marcus/rsense', {
-      \ 'autoload': {
-      \   'filetypes': 'ruby',
-      \ },
-      \}
-NeoBundle 'supermomonga/neocomplete-rsense.vim', {
-      \ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
-      \}
 let g:rsenseUseOmniFunc = 1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
@@ -86,8 +78,3 @@ nmap <Space> <Plug>RDSendLine
 " Haskell
 "--------------------------------------------------------------------
 
-NeoBundle 'kana/vim-filetype-haskell' " indent
-NeoBundle 'eagletmt/ghcmod-vim' " display types of variables
-" ghcmod-vim needs ghc-mod which can be installed by "cabal install ghc-mod"
-let $PATH = $PATH . ':' . expand('~/.cabal/bin')
-NeoBundle 'ujihisa/neco-ghc' " complete

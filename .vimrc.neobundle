@@ -1,16 +1,148 @@
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
   call neobundle#begin(expand('~/.vim/bundle'))
+
+  NeoBundle 'Shougo/neobundle.vim'
+  NeoBundle 'Shougo/vimproc', {
+        \ 'build': {
+        \ 'windows' : 'echo "Sorry, cannot update"',
+        \ 'cygwin'  : 'make -f make_cygwin.mak',
+        \ 'mac'     : 'make -f make_mac.make',
+        \ 'unix'    : 'make -f make_unix.make',
+        \ },
+        \}
+  NeoBundle 'Shougo/unite.vim'
+  " NeoBundle 'Shougo/vimfier'
+  NeoBundle 'scrooloose/nerdtree'
+  nnoremap <silent><C-e> :NERDTreeToggle<CR>
+  NeoBundle 'tomtom/tcomment_vim'
+
+
+  NeoBundle 'SingleCompile'
+  NeoBundle 't9md/vim-quickhl'
+  NeoBundle 'jceb/vim-hier'
+  NeoBundle 'thinca/vim-quickrun'
+ 
+  NeoBundle 'Shougo/neocomplete'
+  NeoBundleFetch 'Shougo/neocomplcache.vim'
+  NeoBundle 'Shougo/neosnippet'
+  NeoBundle 'Shougo/neosnippet-snippets'
+  NeoBundle 'honza/vim-snippets'
+  NeoBundle 'rcmdnk/vim-octopress-snippets'
+
+  NeoBundle 'osyo-manga/vim-marching'
+  NeoBundle 'osyo-manga/vim-watchdogs'
+  NeoBundle 'osyo-manga/shabadou.vim'
+  NeoBundle 'vim-jp/cpp-vim'
+  NeoBundle 'davidhalter/jedi-vim'
+
+
+  NeoBundleLazy 'marcus/rsense', {
+        \ 'autoload': {
+        \   'filetypes': 'ruby',
+        \ },
+        \}
+  " NeoBundle 'supermomonga/neocomplete-rsense.vim', {
+  "       \ 'depends': ['Shougo/neocomplete.vim', 'marcus/rsense'],
+  "       \}
+  
+  NeoBundle "itchyny/lightline.vim"
+  
+  
+  NeoBundle 'kana/vim-filetype-haskell' " indent
+  NeoBundle 'eagletmt/ghcmod-vim' " display types of variables
+  " ghcmod-vim needs ghc-mod which can be installed by "cabal install ghc-mod"
+  let $PATH = $PATH . ':' . expand('~/.cabal/bin')
+  NeoBundle 'ujihisa/neco-ghc' " completeai
+
+
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'kannokanno/previm'
+
+NeoBundle 'ujihisa/unite-colorscheme'
+NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'nanotech/jellybeans.vim'
+
   call neobundle#end()
 endif
+"--------------------------------------------------------------------
+" C/C++
+"--------------------------------------------------------------------
 
-NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc', {
-  \ 'build': {
-  \ 'windows' : 'echo "Sorry, cannot update"',
-  \ 'cygwin'  : 'make -f make_cygwin.mak',
-  \ 'mac'     : 'make -f make_mac.make',
-  \ 'unix'    : 'make -f make_unix.make',
-  \ },
-  \}
+
+" clang command setupj:w
+let g:marching_clang_command="/usr/bin/clang++-3.5"
+" let g:marching_backend="sync_wandbox"
+let g:marching_backend = "sync_clang_command"
+let g:marching_clang_command_option="-std=c++1y"
+let g:marching_enable_neocomplete=1
+" imap <C-x><C-o><Plug>(marching_start_omni_complete)
+" imap <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
+" let g:marching_enable_dup=1
+" let g:marching#sync_wandbox#timeout="10"
+let g:marching_include_paths = [
+      \ "/usr/include",
+      \ "/usr/local/include"
+      \]
+
+
+" set include directory
+let g:neocomplete#sources#include#paths = {
+  \ 'cpp': '.,/usr/include/pcl-1.7,/usr/local/include'
+  \ }
+
+" if !exists('g:neocomplete#sources#include#patterns') 
+"   let g:neocomplete#sources#include#patterns = {}
+" endif
+" let g:neocomplete#sources#include#patterns.c='^\s*#\s*include'
+" let g:neocomplete#sources#include#patterns.cpp='^\s*#\s*include'
+
+" let g:acp_enableAtStartup=0
+let g:neocomplete#enable_at_startup=1
+" let g:neocomplete#enable_ignore_case=1
+" let g:neocomplete#enable_smart_case=1
+" let g:neocomplete#skip_auto_completion_time=""
+" let g:neocomplete#force_overwrite_completefnc=1
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+
+let g:neocomplete#force_omni_input_patterns.cpp =
+          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+"
+" Plugin key-mappings.
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)"
+\: "\<TAB>"
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" Enable snipMate compatibility feature.
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+" Tell Neosnippet about the other snippets
+let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+
+
+"--------------------------------------------------------------------
+" Python
+"--------------------------------------------------------------------
+autocmd FileType python let b:did_ftplugin=1
+autocmd FileType python setlocal omnifunc=jedi#completions
+autocmd FileType python setlocal completeopt-=preview
+let g:jedi#popup_select_first=0
+let g:jedi#auto_vim_configuration=0
 

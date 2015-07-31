@@ -60,6 +60,9 @@ export PATH=$PATH:~/binaries
 export PYTHONPATH=$PATH:~/pyModule
 export PYTHONPATH=$PYTHONPATH:~/pylib
 export PATH=$PATH:~/binaries
+export PYTHONPATH=$PYTHONPATH:~/Applications/caffe/python
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib
+export PYTHONPATH=$PYTHONPATH:~/Downloads/Setup/VTK-6.2.0/Wrapping/Python
 
 #----------------------------------------------------------#
 # リンカの設定

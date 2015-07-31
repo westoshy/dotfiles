@@ -1,7 +1,3 @@
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'nanotech/jellybeans.vim'
 set background=dark
 set t_Co=16
 colorscheme hybrid-light

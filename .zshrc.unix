@@ -17,8 +17,8 @@ precmd () {
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
 # alias
-alias g++11='g++ -std=c++11'
-alias clang++11='clang++ -std=c++11'
+alias g++='g++ -std=c++11'
+alias clang++='clang++-3.5 -std=c++11'
 alias ls='ls --color'
 alias vim='/usr/local/bin/vim'
 alias gvim="/usr/local/bin/gvim 2>/dev/null"
@@ -26,7 +26,7 @@ alias gvim="/usr/local/bin/gvim 2>/dev/null"
 # git command
 export GIT_REPOSITORY=~/Dropbox/GitRepository
 alias lsrepos="ls $GIT_REPOSITORY -1"
-
+alias dlcmake="wget https://gist.githubusercontent.com/westoshy/5d5b7051c743a285ae56/raw/b9ca9027fd66385c669664b197231ceb234a7bb0/CMakeLists.txt"
 # path
 export BUNDLER_PATH=~/Applications/Bundler-v0.4
 export BUNDLER_BIN_PATH=$BUNDLER_PATH/bin
@@ -34,15 +34,28 @@ export PMVS2_BIN_PATH=~/Applications/pmvs-2/program/main
 export WEKA_PATH=~/Applications/weka
 export SLICER_HOME=~/Applications/Slicer
 export SPTK_BIN="/usr/local/SPTK/bin"
+export FREESURFER_HOME=/usr/local/freesurfer
+source $FREESURFER_HOME/SetUpFreeSurfer.sh
 
 export PATH=$PATH:/usr/include/c++/4.8.2
 export PATH=$PATH:/usr/bin
 export PATH=$PATH:/usr/local/include
+
+# Script Codes
 export PATH=$PATH:~/scripts
+export PATH=$PATH:~/Scripts
+export PATH=$PATH:~/Scripts/Utils
+export PATH=$PATH:~/Scripts/DataProcessing
+export PATH=$PATH:~/Scripts/AdHoc
+
 export PATH=$PATH:~/binaries
 export PATH=$PATH:$WEKA_PATH
 export PATH=$PATH:$SPTK_BIN
 
+export CPATH=/usr/local/include
+export LIBRARY_PATH=/usr/local/lib
+
+export PATH=~/.cabal/bin:$PATH
 
 # ldpath
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
@@ -54,6 +67,8 @@ export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include/eigen3
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/eigen3
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/include/pcl-1.7
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include/vtk-6.2
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/include/ITK-4.7
 export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:~/Developments/Cplusplus/publiclib/include
 
 # path for sample data 
@@ -71,4 +86,7 @@ export CLASSPATH=$CLASSPATH:$WEKA_PATH
 
 # python path
 export PYTHONPATH=$PYTHONPATH:~/pylib
+export PYTHONPATH=$PYTHONPATH:~/Developments/Python/MyPythonLibrary
 export PYTHONPATH=$PYTHONPATH:~/Applications/caffe/python
+export PYTHONPATH=$PYTHONPATH:/usr/local/lib
+export PYTHONPATH=$PYTHONPATH:~/Downloads/Setup/VTK-6.2.0/Wrapping/Python
