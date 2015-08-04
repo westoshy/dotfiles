@@ -8,12 +8,12 @@ zstyle ':vcs_info:*' formats '(%s)-[%b]'
 zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
 zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
 zstyle ':vcs_info:bzr:*' use-simple true
-precmd () {
-  psvar=()
-  LANG=en_US.UTF-8 vcs_info
-  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-}
-RPROMPT="%1(v|%F{green}%1v%f|)"
+# precmd () {
+#   psvar=()
+#   LANG=en_US.UTF-8 vcs_info
+#   [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+# }
+# RPROMPT="%1(v|%F{green}%1v%f|)"
 
 setopt transient_rprompt
 
@@ -24,6 +24,7 @@ alias l='ls -CF'
 alias vim='/cygdrive/c/Applications/vim32bit/vim.exe'
 alias gvim='/cygdrive/c/Applications/vim32bit/gvim.exe'                     
 alias vbs='/cygdrive/c/windows/system32/cscript.exe'
+alias atom='/cygdrive/c/Users/nishimura/AppData/Local/atom/app-1.0.0/atom.exe'
 alias ffmpeg2theora='/cygdrive/c/Applications/ffmpeg/bin/ffmpeg2theora.exe'
 export OUTPUT_CHARSET=sjis                                                  
 export PATH=$PATH:/C/Dev/Python27/Scripts                                   
