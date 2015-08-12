@@ -6,8 +6,7 @@ FontHeight=14
 CursorColour=0,0,0
 CursorType=underscore
 Locale=ja_JP
-Charset=SJIS
-#Charset=UTF-8
+Charset=UTF-8
 BackspaceSendsBS=yes
 RightClickAction=paste
 ClicksTargetApp=no
@@ -16,7 +15,6 @@ FontSmoothing=default
 CopyOnSelect=yes
 ForegroundColour=255,255,255
 OpaqueWhenFocused=no
-
 Black=0,0,0
 Red=255,100,0
 Green=183,234,17
