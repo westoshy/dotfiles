@@ -11,8 +11,9 @@ cd ${HOME}
 export PATH=:$PATH:~/scripts/
 export PATH=:$PATH:~/scripts/install
 
+# shell function
 if [ -e scripts ]; then
-  source ~/scripts/shellfunc/shellfunc.fnc
+  source ~/MyScripts/shellfunc/shellfunc.fnc
 fi
 
 # common setup
