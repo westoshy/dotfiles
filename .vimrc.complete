@@ -1,53 +1,80 @@
 
 "--------------------------------------------------------------------
+" neocomplete
+" Note: This option must set it in .vimrc(_vimrc).  
+" NOT IN .gvimrc(_gvimrc)!
+" -------------------------------------------------------------------
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Plugin key-mappings.
+inoremap <expr><C-g> neocomplete#undo_completion()
+inoremap <expr><C-l> neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  " return neocomplete#close_popup() . "\<CR>"
+  " For no inserting <CR> key.
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
+
+" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
+"--------------------------------------------------------------------
 " C/C++
 "--------------------------------------------------------------------
-
 " clang command setup
-let g:marching_clang_command="/usr/bin/clang++-3.5"
-" let g:marching_backend="sync_wandbox"
-let g:marching_backend = "sync_clang_command"
-let g:marching_clang_command_option="-std=c++1y"
-let g:marching_enable_neocomplete=1
-" imap <C-x><C-o><Plug>(marching_start_omni_complete)
-" imap <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
-" let g:marching_enable_dup=1
-" let g:marching#sync_wandbox#timeout="10"
-
-
-" set include directory
-let g:neocomplete#sources#include#paths = {
-  \ 'cpp': '.,/usr/include,/usr/local/include'
-  \ }
-
-if !exists('g:neocomplete#sources#include#patterns') 
-  let g:neocomplete#sources#include#patterns = {}
+if has('win32')
+  let g:marching_clang_command="C:/Applications/MinGW/LLVM/bin/clang.exe"
+  let g:marching_backend = "sync_clang_command"
+  let g:marching_clang_command#options={
+        \ "cpp": "-std=c++1y"
+        \}
+  let g:marching_include_paths = [
+        \   "C:/Applications/MinGW/lib/gcc/mingw32/4.8.1/include/c++/"
+        \]
+  let g:marching_enable_neocomplete=1
 endif
-let g:neocomplete#sources#include#patterns.c='^\s*#\s*include'
-let g:neocomplete#sources#include#patterns.cpp='^\s*#\s*include'
 
-let g:acp_enableAtStartup=0
-let g:neocomplete#enable_at_startup=1
-" let g:neocomplete#enable_ignore_case=1
-" let g:neocomplete#enable_smart_case=1
-" let g:neocomplete#skip_auto_completion_time=""
-let g:neocomplete#force_overwrite_completefnc=1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
 
 let g:neocomplete#force_omni_input_patterns.cpp =
-          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+  \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
 "--------------------------------------------------------------------
 " Python
 "--------------------------------------------------------------------
-autocmd FileType python let b:did_ftplugin=1
 autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType python setlocal completeopt-=preview
-let g:jedi#popup_select_first=0
+let g:jedi#completions_enabled=0
 let g:jedi#auto_vim_configuration=0
 
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns={}
+endif
+"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+let g:neocomplete#force_omni_input_patterns.python = '\h\w|[^. \t].\w'
 "--------------------------------------------------------------------
 " Ruby
 "--------------------------------------------------------------------
