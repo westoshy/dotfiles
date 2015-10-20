@@ -89,9 +89,9 @@ let g:marching_include_paths = [
 
 
 " set include directory
-let g:neocomplete#sources#include#paths = {
-  \ 'cpp': '.,/usr/include/pcl-1.7,/usr/local/include'
-  \ }
+" let g:neocomplete#sources#include#paths = {
+"   \ 'cpp': '.,/usr/include/pcl-1.7,/usr/local/include'
+"   \ }
 
 " if !exists('g:neocomplete#sources#include#patterns') 
 "   let g:neocomplete#sources#include#patterns = {}
