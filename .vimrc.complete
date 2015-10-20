@@ -39,6 +39,10 @@ inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
 
 " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
+let g:neocomplete#sources#include#paths = {
+  \ 'cpp': '.,/usr/include,/usr/local/include'
+  \}
+
 "--------------------------------------------------------------------
 " C/C++
 "--------------------------------------------------------------------
@@ -52,6 +56,19 @@ if has('win32')
   let g:marching_include_paths = [
         \   "C:/Applications/MinGW/lib/gcc/mingw32/4.8.1/include/c++/"
         \]
+  let g:marching_enable_neocomplete=1
+elseif has('mac')
+
+else
+  let g:marching_clang_command="/usr/bin/clang++-3.5"
+  let g:marching_backend = "sync_clang_command"
+  let g:marching_clang_command#options={
+    \ "cpp": "-std=c++1y"
+    \}
+  let g:marching_include_paths = [
+    \ "/usr/local/include/",
+    \ "/usr/include/"
+    \]
   let g:marching_enable_neocomplete=1
 endif
 
