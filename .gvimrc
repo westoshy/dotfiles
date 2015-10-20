@@ -15,3 +15,15 @@ else
   set showtabline=2
   set transparency=150
 endif
+
+" Display Hidden File in NERDTrees
+let NERDTreeShowHidden = 1
+
+" Default Display on
+autocmd VimEnter * execute 'NERDTree'
+" Display Hidden File in NERDTrees
+let NERDTreeShowHidden = 1
+
+" Default Display on
+autocmd VimEnter * execute 'NERDTree'
+

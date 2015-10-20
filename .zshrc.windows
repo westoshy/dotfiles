@@ -19,7 +19,22 @@ zstyle ':vcs_info:bzr:*' use-simple true
 
 setopt transient_rprompt
 
-export PATH=$PATH:/C/Applications/ffmpeg/bin                         
+export WEKA_PATH=/cygdrive/c/Applications/weka
+export PATH=$PATH:$WEKA_PATH
+export PATH=$PATH:/C/Applications/ffmpeg/bin
+
+export OUTPUT_CHARSET=sjis                                                  
+export PATH=$PATH:/C/Dev/Python27/Scripts                                   
+export PATH=$PATH:~/Scripts/                                                
+export PATH=$PATH:/C/Users/nishimura/AppData/Local/Pandoc                   
+export PATH=$PATH:/C/Applications/vim32bit 
+
+export CYGWIN="winsymlinks"
+
+# Java Classpath(must be set by back slash in Windows)
+export CLASSPATH="C:\\Applications\\weka"
+
+
 alias ls="ls --color=auto --show-control-chars -I'NTUSER*' -I'ntuser*'"     
 alias ll='ls -l'                                                            
 alias l='ls -CF'                                                            
@@ -28,9 +43,4 @@ alias gvim='/cygdrive/c/Applications/vim32bit/gvim.exe'
 alias vbs='/cygdrive/c/windows/system32/cscript.exe'
 alias atom='/cygdrive/c/Users/nishimura/AppData/Local/atom/app-1.0.0/atom.exe'
 alias ffmpeg2theora='/cygdrive/c/Applications/ffmpeg/bin/ffmpeg2theora.exe'
-export OUTPUT_CHARSET=sjis                                                  
-export PATH=$PATH:/C/Dev/Python27/Scripts                                   
-export PATH=$PATH:~/Scripts/                                                
-export PATH=$PATH:/C/Users/nishimura/AppData/Local/Pandoc                   
-export PATH=$PATH:/C/Applications/vim32bit 
-export CYGWIN="winsymlinks"        
+alias subl='/cygdrive/c/Program\ Files/Sublime\ Text\ 3/subl.exe'
